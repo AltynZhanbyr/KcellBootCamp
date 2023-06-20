@@ -1,7 +1,12 @@
 package kz.kcell.kcellbootcamp.presentation.moviesList
 
 import android.os.Bundle
+import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.widget.Toolbar
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -28,6 +33,14 @@ class MoviesFragment : Fragment(R.layout.fragment_movies) {
         super.onViewCreated(view, savedInstanceState)
         binding.movieRecyclerView.adapter = this@MoviesFragment.adapter
         setupObservers()
+
+        val activity = requireActivity()
+        val toolbar = activity.findViewById<Toolbar>(R.id.toolbar)
+        toolbar.title = getString(R.string.movies_fragment)
+
+        binding.serachButton.setOnClickListener{
+            findNavController().navigate(R.id.action_moviesFragment_to_searchFragment)
+        }
     }
 
     private fun setupObservers() {
@@ -55,4 +68,5 @@ class MoviesFragment : Fragment(R.layout.fragment_movies) {
             bundleOf(ARG_MOVIE_ID to movie.id)
         )
     }
+
 }

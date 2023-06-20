@@ -1,5 +1,6 @@
 package kz.kcell.kcellbootcamp.presentation.moviesList
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -10,6 +11,9 @@ import kz.kcell.kcellbootcamp.data.entities.Movie
 import kz.kcell.kcellbootcamp.databinding.MovieItemBinding
 import kz.kcell.kcellbootcamp.utils.loadImage
 import kz.kcell.kcellbootcamp.utils.orZero
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 
 class MoviesAdapter(
     private val onClick: (item: Movie) -> Unit
@@ -30,6 +34,16 @@ class MoviesAdapter(
     override fun onBindViewHolder(holder: MoviesAdapter.MovieViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
+    fun formatDate(inputDate: String): String {
+        val inputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val outputFormat = SimpleDateFormat("dd MMM yyyy", Locale.getDefault())
+
+        val date = inputFormat.parse(inputDate)
+        val calendar = Calendar.getInstance()
+        calendar.time = date
+
+        return outputFormat.format(calendar.time)
+    }
 
     inner class MovieViewHolder(
         private val onClick: (item: Movie) -> Unit,
@@ -41,7 +55,7 @@ class MoviesAdapter(
                 onClick.invoke(item)
             }
             movieItemTitle.text = item.title
-            movieItemRelease.text = item.releaseDate
+            movieItemRelease.text = formatDate(item.releaseDate)
             movieItemRatingbar.rating = item.voteAverage.toFloat().orZero()
             movieItemPoster.loadImage(
                 BuildConfig.IMAGE_URL + item.posterPath,

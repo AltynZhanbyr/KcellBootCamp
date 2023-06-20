@@ -1,10 +1,10 @@
-package kz.kcell.kcellbootcamp.presentation.moviesDetail
+package kz.kcell.kcellbootcamp.presentation.moviesSearch
 
-import android.util.Log
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.switchMap
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kz.kcell.kcellbootcamp.data.entities.Movie
@@ -13,14 +13,8 @@ import kz.kcell.kcellbootcamp.utils.Resource
 import javax.inject.Inject
 
 @HiltViewModel
-class MovieDetailViewModel @Inject constructor(
-    private val repository: MovieRepository,
+class SearchViewModel @Inject constructor(
+    repository: MovieRepository
 ) : ViewModel() {
 
-    val id = MutableLiveData<Int>()
-
-    private val _content = id.switchMap {
-        repository.getMovie(it)
-    }
-    val content: LiveData<Resource<Movie>> = _content
 }

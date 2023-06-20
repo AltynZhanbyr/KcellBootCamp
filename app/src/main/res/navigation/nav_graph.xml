@@ -8,15 +8,26 @@
     <fragment
         android:id="@+id/moviesFragment"
         android:name="kz.kcell.kcellbootcamp.presentation.moviesList.MoviesFragment"
-        android:label="movies_fragment"
         tools:layout="@layout/fragment_movies" >
         <action
             android:id="@+id/action_moviesFragment_to_movieDetailFragment"
             app:destination="@id/movieDetailFragment" />
+        <action
+            android:id="@+id/action_moviesFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
     </fragment>
     <fragment
         android:id="@+id/movieDetailFragment"
         android:name="kz.kcell.kcellbootcamp.presentation.moviesDetail.MovieDetailFragment"
-        android:label="movie_detail_fragment"
+
         tools:layout="@layout/fragment_movie_detail" />
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="kz.kcell.kcellbootcamp.presentation.moviesSearch.SearchFragment"
+        android:label="Поиск фильмов"
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_searchFragment_to_movieDetailFragment"
+            app:destination="@id/movieDetailFragment" />
+    </fragment>
 </navigation>
